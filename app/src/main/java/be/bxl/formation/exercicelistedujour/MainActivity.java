@@ -3,6 +3,7 @@ package be.bxl.formation.exercicelistedujour;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +42,8 @@ private LocalDate dateevent = now();
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.bt_main_addevent :
+                addevent();
             case R.id.bt_main_moinsunjour :
                 moinsoneday();
                 break;
@@ -52,7 +55,14 @@ private LocalDate dateevent = now();
                 throw new RuntimeException("Bouton non implementé !");
         }
     }
+public void addevent(){
+    // Créer l'intent avec les datas
+    Intent intent = new Intent(getApplicationContext(), Add_event.class);
+    startActivity(intent);
+    finish();
 
+
+}
     public void moinsoneday()  {
     dateevent=dateevent.minusDays(1);
         afficherdatebutton();
