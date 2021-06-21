@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.AjouterActivite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:text="Date de l' activité" />
+
+            <DatePicker
+                android:id="@+id/dp_frag_addevent_dateevent"
+                android:layout_width="wrap_content"
+                android:layout_height="147dp"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:scaleX="0.9"
+                android:scaleY="0.9" />
+
+
+        </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Nom "
+        android:textAlignment="center"
+        android:textSize="30dp" />
+
+    <EditText
+        android:id="@+id/et_frag_addevent_nomactivite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="nom de l'activité"
+        android:inputType="textMultiLine"
+         />
+</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Description : "
+            android:textAlignment="center"
+            android:textSize="30dp" />
+
+        <EditText
+            android:id="@+id/et_frag_addevent_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description de l'activité"
+            android:inputType="textMultiLine"
+            android:minLines="4" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_frag_addevent_valider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+
+
+                android:text="Valider"></Button>
+
+            <View
+                android:layout_width="15dp"
+                android:layout_height="0dp" />
+
+            <Button
+                android:id="@+id/bt_frag_addevent_annuler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="Annuler"></Button>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>
