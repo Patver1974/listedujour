@@ -3,6 +3,7 @@ package be.bxl.formation.exercicelistedujour.fragment;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.IntegerRes;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
@@ -24,10 +25,10 @@ import be.bxl.formation.exercicelistedujour.models.TacheData;
  * create an instance of this fragment.
  */
 public class AjouterActivite extends Fragment {
-private DatePicker dp_date;
-private EditText et_nomactivite, et_description;
-private Button bt_valider,bt_annuler;
-private ArrayList<TacheData> ArrayTache;
+    private DatePicker dp_date;
+    private EditText et_nomactivite, et_description;
+    private Button bt_valider, bt_annuler;
+    private ArrayList<TacheData> ArrayTache;
 
 
     public AjouterActivite() {
@@ -45,13 +46,7 @@ private ArrayList<TacheData> ArrayTache;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bt_valider.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TacheData ATaches= new TacheData(dp_date.getDayOfMonth(),dp_date.getMonth(),dp_date.getYear(),et_nomactivite.getText().toString(),et_description.getText().toString());
-                et_description.setText("555");
-            }
-        });
+
 
     }
 
@@ -59,14 +54,42 @@ private ArrayList<TacheData> ArrayTache;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_ajouter_activite, container, false);
-        dp_date=v.findViewById(R.id.dp_frag_addevent_dateevent);
-        et_nomactivite=v.findViewById(R.id.et_frag_addevent_nomactivite);
-        et_description=v.findViewById(R.id.et_frag_addevent_description);
-        bt_valider=v.findViewById(R.id.bt_frag_addevent_valider);
-        bt_annuler=v.findViewById(R.id.bt_frag_addevent_annuler);
+        View v = inflater.inflate(R.layout.fragment_ajouter_activite, container, false);
+        dp_date = v.findViewById(R.id.dp_frag_addevent_dateevent);
+        et_nomactivite = v.findViewById(R.id.et_frag_addevent_nomactivite);
+        et_description = v.findViewById(R.id.et_frag_addevent_description);
+        bt_valider = v.findViewById(R.id.bt_frag_addevent_valider);
+        bt_annuler = v.findViewById(R.id.bt_frag_addevent_annuler);
+
+        initializeViewData();
 
 
         return v;
     }
+
+    private void initializeViewData() {
+
+        et_nomactivite.setText("Nom1");
+        et_description.setText("Nom2");
+
+        bt_valider.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+                TacheData ATaches = new TacheData(dp_date.getDayOfMonth(), dp_date.getMonth(), dp_date.getYear(), et_nomactivite.getText().toString(), et_description.getText().toString());
+                if (taskListener != null ){
+                    taskListener.onClickItem(ATaches);
+
+                }
+            }
+        });
+
+    }
+    @FunctionalInterface
+    public interface OnTaskClick {
+        void onClickItem(TacheData ATaches);
+    }
+
+    private OnTaskClick taskListener;
+    public void setTaskListener(OnTaskClick event) { this.taskListener = event;};
 }

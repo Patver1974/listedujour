@@ -14,10 +14,12 @@ import android.widget.Button;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import be.bxl.formation.exercicelistedujour.fragment.AjouterActivite;
 import be.bxl.formation.exercicelistedujour.fragment.Meteo;
+import be.bxl.formation.exercicelistedujour.models.TacheData;
 
 import static java.time.LocalDate.now;
 
@@ -25,6 +27,7 @@ import static java.time.LocalDate.now;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnAddevent, btnmoinonday, btnplusoneday, btnAfficherEvent, btnMeteo;
     private LocalDate dateevent = now();
+    private ArrayList<TacheData> Datatache=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +105,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Application de la transaction
         transaction.commit();
+
+        FragmentAjouterActivite.setTaskListener(new AjouterActivite.OnTaskClick() {
+            @Override
+            public void onClickItem(TacheData ATaches) {
+                Log.d("Edzzzzzzzitable", ATaches.getName().toString());
+                Datatache.add(ATaches);
+            }
+        });
+
+
 
 
     }

@@ -5,13 +5,45 @@
     android:layout_height="match_parent"
     tools:context=".fragment.Meteo">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tv_frag_weather"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Méteo..."
-        android:textSize="30sp"
-        />
+        android:orientation="vertical">
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom de la ville: " />
+
+            <EditText
+                android:id="@+id/et_frag_meteo_nomville"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ville"
+                android:inputType="textMultiLine"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_frag_meteo_validernom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valider"
+
+
+            />
+        <TextView
+            android:id="@+id/tv_frag_weather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Méteo..."
+            android:textSize="30sp" />
+    </LinearLayout>
 </FrameLayout>

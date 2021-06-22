@@ -4,10 +4,20 @@ public class WeatherData {
 
     private String city;
     private double temp;
+    private double humidity;
 
-    public WeatherData(String city, double temp) {
+    public WeatherData(String city, double temp, double humidity) {
         this.city = city;
         this.temp = temp;
+        this.humidity = humidity;
+    }
+
+    public double getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(double humidity) {
+        this.humidity = humidity;
     }
 
     public String getCity() {

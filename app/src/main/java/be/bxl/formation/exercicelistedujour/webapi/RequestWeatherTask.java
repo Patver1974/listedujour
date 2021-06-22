@@ -87,8 +87,9 @@ public class RequestWeatherTask extends AsyncTask<String, Void, WeatherData> {
 
                 JSONObject main = json.getJSONObject("main");
                 double temp = main.getDouble("temp");
+                double humidite = main.getDouble("humidity");
 
-                result = new WeatherData(city, temp);
+                result = new WeatherData(city, temp, humidite);
             }
             catch (JSONException e) {
                 e.printStackTrace();
