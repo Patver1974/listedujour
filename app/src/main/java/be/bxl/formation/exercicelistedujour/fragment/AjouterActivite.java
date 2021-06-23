@@ -1,10 +1,12 @@
 package be.bxl.formation.exercicelistedujour.fragment;
 
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.IntegerRes;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -70,7 +72,22 @@ public class AjouterActivite extends Fragment {
     private void initializeViewData() {
 
         et_nomactivite.setText("Nom1");
-        et_description.setText("Nom2");
+        et_description.setText("Desc1");
+
+
+        bt_annuler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialogClearTask();
+
+
+
+            }
+        });
+
+
+
+
 
         bt_valider.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -85,6 +102,31 @@ public class AjouterActivite extends Fragment {
         });
 
     }
+
+    private void openDialogClearTask() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.setTitle("Are you sure ?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        et_nomactivite.setText("");
+                        et_description.setText("");
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // On ne fait rien ;)
+                    }
+                })
+                .show();
+    }
+
+
+
+
+
     @FunctionalInterface
     public interface OnTaskClick {
         void onClickItem(TacheData ATaches);
@@ -92,4 +134,19 @@ public class AjouterActivite extends Fragment {
 
     private OnTaskClick taskListener;
     public void setTaskListener(OnTaskClick event) { this.taskListener = event;};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

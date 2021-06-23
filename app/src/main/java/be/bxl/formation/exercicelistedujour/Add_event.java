@@ -18,6 +18,7 @@ import static java.time.LocalDate.now;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class Add_event extends AppCompatActivity implements View.OnClickListener{
     public static final String EXTRA_LOCALEDATE = "localeDate";
+    public static final String EXTRA_LOCALEARRAY = "Arraydata";
     private Button btnmoinonday, btnplusoneday, btnAfficherEvent;
     private LocalDate dateevent = now();
     private ArrayList<TacheData> Datatache = new ArrayList<>();
@@ -35,7 +36,11 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
         if(getIntent().hasExtra(EXTRA_LOCALEDATE)) {
             Bundle bundle = getIntent().getExtras();
             dateevent = LocalDate.parse(bundle.getString(EXTRA_LOCALEDATE));
+            afficherdatebutton();
+
+            btnplusoneday.setOnClickListener(this);
             btnmoinonday.setOnClickListener(this);
+            btnAfficherEvent.setOnClickListener(this);
     }}
 
     public void onClick(View v) {
