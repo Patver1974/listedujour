@@ -20,4 +20,6 @@
     <string name="error_fragment_message">An error occurred</string>
     <string name="dismiss_error">Dismiss</string>
     <string name="title_activity_main_evenement">Leanback Title</string>
+    <string name="fleche_droite"><![CDATA[-->]]></string>
+    <string name="fleche_gauche"><![CDATA[<--]]></string>
 </resources>

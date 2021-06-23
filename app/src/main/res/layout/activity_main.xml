@@ -32,9 +32,10 @@
             <Button
                 android:id="@+id/bt_main_moinsunjour"
                 android:layout_width="wrap_content"
+                android:text="@string/fleche_gauche"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:text="-- " />
+                 />
 
             <View
                 android:layout_width="20dp"
@@ -58,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:text="++ "
+                android:text="@string/fleche_droite"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
@@ -69,8 +70,12 @@
 
             <Button
                 android:id="@+id/bt_main_addevent"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="20dp"
+                android:backgroundTint="@color/teal_200"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Ajouter Tache" />
             <View
                 android:layout_width="20dp"
@@ -79,10 +84,13 @@
 
             <Button
                 android:id="@+id/bt_main_meteo"
-                android:layout_width="200dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/teal_200"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/black"
                 android:text="Meteo" />
         </LinearLayout>
 

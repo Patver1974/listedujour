@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void afficherEvent() {
 
         Intent intent = new Intent(getApplicationContext(), Add_event.class);
-        intent.putExtra(Add_event.EXTRA_LOCALEDATE,dateevent.toString());
-intent.putExtra(Add_event.EXTRA_LOCALEARRAY,Datatache);
+        intent.putExtra(Add_event.EXTRA_LOCALEDATE,dateevent.format(DateTimeFormatter.ISO_DATE));
+        intent.putExtra(Add_event.EXTRA_LOCALEARRAY,Datatache);
         // Démarre l'activté de l'exo 02
         startActivity(intent);
 

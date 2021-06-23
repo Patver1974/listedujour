@@ -2,6 +2,8 @@ package be.bxl.formation.exercicelistedujour;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -9,8 +11,10 @@ import android.view.View;
 import android.widget.Button;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import be.bxl.formation.exercicelistedujour.Adapter.ActiviteAdapters;
 import be.bxl.formation.exercicelistedujour.models.TacheData;
 
 import static java.time.LocalDate.now;
@@ -21,21 +25,25 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
     public static final String EXTRA_LOCALEARRAY = "Arraydata";
     private Button btnmoinonday, btnplusoneday, btnAfficherEvent;
     private LocalDate dateevent = now();
-    private ArrayList<TacheData> Datatache = new ArrayList<>();
-
+    private ArrayList<TacheData> datatache = new ArrayList<>();
+    private RecyclerView rvActivite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+        //utiliser le bundle
+        datatache.add(new TacheData(23,06,2021,"manger","prendre banane"));
+        datatache.add(new TacheData(23,06,2021,"manger","prendre pomme"));
 
         btnmoinonday = findViewById(R.id.bt_addevent_moinsunjour);
         btnplusoneday = findViewById(R.id.bt_addevent_plusunjour);
         btnAfficherEvent = findViewById(R.id.bt_addevent_afficherevent);
+        rvActivite=findViewById(R.id.rv_addevent_item);
 
         if(getIntent().hasExtra(EXTRA_LOCALEDATE)) {
             Bundle bundle = getIntent().getExtras();
-            dateevent = LocalDate.parse(bundle.getString(EXTRA_LOCALEDATE));
+            dateevent = LocalDate.parse(bundle.getString(EXTRA_LOCALEDATE), DateTimeFormatter.ISO_DATE);
             afficherdatebutton();
 
             btnplusoneday.setOnClickListener(this);
@@ -54,12 +62,31 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
                 plusoneday();
                 break;
             case R.id.bt_addevent_afficherevent:
-                plusoneday();
+                afficherlestache();
                 break;
 
             default:
                 throw new RuntimeException("Bouton non implementé !");
         }
+    }
+
+    private void afficherlestache() {
+        ActiviteAdapters activiteAdapters = new ActiviteAdapters(
+                getApplicationContext(),
+                datatache
+        );
+
+        // Configurer le RecyclerView
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(
+                2, StaggeredGridLayoutManager.HORIZONTAL
+        );
+        rvActivite.setLayoutManager(layoutManager);
+
+        rvActivite.setAdapter(activiteAdapters);
+        rvActivite.setHasFixedSize(true);
+
+
+
     }
 
 
