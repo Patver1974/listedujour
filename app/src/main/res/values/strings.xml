@@ -19,4 +19,5 @@
     <!-- Error messages -->
     <string name="error_fragment_message">An error occurred</string>
     <string name="dismiss_error">Dismiss</string>
+    <string name="title_activity_main_evenement">Leanback Title</string>
 </resources>

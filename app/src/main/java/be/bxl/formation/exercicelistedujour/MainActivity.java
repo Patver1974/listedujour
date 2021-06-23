@@ -65,12 +65,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 plusoneday();
                 break;
             case R.id.bt_main_afficherevent:
-                plusoneday();
+                afficherEvent();
+
                 break;
 
             default:
                 throw new RuntimeException("Bouton non implementé !");
         }
+    }
+
+    private void afficherEvent() {
+
+        Intent intent = new Intent(getApplicationContext(), Add_event.class);
+        intent.putExtra(Add_event.EXTRA_LOCALEDATE,dateevent.toString());
+
+
+        // Démarre l'activté de l'exo 02
+        startActivity(intent);
+
+     //finish();
+
     }
 
     private void donnermeteo() {
