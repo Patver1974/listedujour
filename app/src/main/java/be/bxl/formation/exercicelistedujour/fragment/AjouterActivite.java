@@ -16,9 +16,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import be.bxl.formation.exercicelistedujour.R;
+import be.bxl.formation.exercicelistedujour.db.dao.TacheDao;
 import be.bxl.formation.exercicelistedujour.models.TacheData;
 
 /**
@@ -93,14 +96,25 @@ public class AjouterActivite extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                TacheData ATaches = new TacheData(dp_date.getDayOfMonth(), dp_date.getMonth(), dp_date.getYear(), et_nomactivite.getText().toString(), et_description.getText().toString());
+
+                TacheData ATaches = new TacheData(getLocatDatePicker(dp_date), et_nomactivite.getText().toString(), et_description.getText().toString());
                 if (taskListener != null ){
                     taskListener.onClickItem(ATaches);
-
+                    TacheDao tacheDao =  new TacheDao(getContext());
+                    tacheDao.openWritable();
+                    long id = tacheDao.insert(ATaches);
+                    tacheDao.close();
                 }
             }
         });
 
+    }
+
+    private LocalDate getLocatDatePicker(DatePicker dp_date) {
+
+        LocalDate ldate = LocalDate.of(dp_date.getYear(),dp_date.getMonth()+1,dp_date.getDayOfMonth());
+
+        return  ldate;
     }
 
     private void openDialogClearTask() {
@@ -117,7 +131,9 @@ public class AjouterActivite extends Fragment {
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // On ne fait rien ;)
+                        //appuie sur back
+                        //getActivity().getSupportFragmentManager().popBackStackImmediate();
+                        //generer un evement pour effacer
                     }
                 })
                 .show();

@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import be.bxl.formation.exercicelistedujour.Adapter.ActiviteAdapters;
+import be.bxl.formation.exercicelistedujour.db.dao.TacheDao;
 import be.bxl.formation.exercicelistedujour.models.TacheData;
 
 import static java.time.LocalDate.now;
@@ -32,9 +33,12 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+
+
+
         //utiliser le bundle
-        datatache.add(new TacheData(23,06,2021,"manger","prendre banane"));
-        datatache.add(new TacheData(23,06,2021,"manger","prendre pomme"));
+        datatache.add(new TacheData(23,6,2021,"manger","prendre banane"));
+        datatache.add(new TacheData(23,6,2021,"manger","prendre pomme"));
 
         btnmoinonday = findViewById(R.id.bt_addevent_moinsunjour);
         btnplusoneday = findViewById(R.id.bt_addevent_plusunjour);
@@ -71,6 +75,14 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
     }
 
     private void afficherlestache() {
+        TacheDao tacheDao = new TacheDao(getApplicationContext());
+        tacheDao.openReadable();
+        datatache = tacheDao.getAllWithDate(dateevent);
+
+        tacheDao.close();
+
+
+
         ActiviteAdapters activiteAdapters = new ActiviteAdapters(
                 getApplicationContext(),
                 datatache
@@ -78,7 +90,7 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
 
         // Configurer le RecyclerView
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(
-                2, StaggeredGridLayoutManager.HORIZONTAL
+                3, StaggeredGridLayoutManager.VERTICAL
         );
         rvActivite.setLayoutManager(layoutManager);
 

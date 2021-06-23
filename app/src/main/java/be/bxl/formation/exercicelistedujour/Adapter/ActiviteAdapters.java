@@ -21,7 +21,7 @@ public class ActiviteAdapters extends RecyclerView.Adapter<ActiviteAdapters.View
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvName, tvDescription;
+        private TextView tvName, tvDescription, tvdate;
         private CardView cvCategory;
 
         public ViewHolder(@NonNull View view) {
@@ -29,7 +29,8 @@ public class ActiviteAdapters extends RecyclerView.Adapter<ActiviteAdapters.View
 
             tvName = view.findViewById(R.id.item_actvite_name);
             tvDescription = view.findViewById(R.id.item_activite_description);
-            //cvCategory = view.findViewById(R.id.item_cv_color);
+            tvdate = view.findViewById(R.id.item_actvite_date);
+
         }
 
         public TextView getTvName() {
@@ -40,7 +41,7 @@ public class ActiviteAdapters extends RecyclerView.Adapter<ActiviteAdapters.View
             return tvDescription;
         }
 
-        //public CardView getCvCategory() { return cvCategory; }
+        public TextView getTvdate() { return tvdate; }
     }
 
 
@@ -62,13 +63,9 @@ public class ActiviteAdapters extends RecyclerView.Adapter<ActiviteAdapters.View
     @Override
     public void onBindViewHolder(@NonNull ActiviteAdapters.ViewHolder holder, int position) {
         TacheData tacheData = dataSet.get(position);
-
-
-
         holder.getTvName().setText(tacheData.getName());
         holder.getTvDescription().setText(tacheData.getDescription());
-
-
+        holder.getTvdate().setText(tacheData.getDateTacheString());
     }
 
     @Override
