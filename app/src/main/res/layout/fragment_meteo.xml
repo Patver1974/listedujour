@@ -19,13 +19,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nom de la ville: " />
+                android:text="@string/nom_de_la_ville" />
 
             <EditText
                 android:id="@+id/et_frag_meteo_nomville"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ville"
+                android:hint="@string/ville"
                 android:inputType="textMultiLine"
                 />
 
@@ -35,7 +35,7 @@
             android:id="@+id/bt_frag_meteo_validernom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Valider"
+            android:text="@string/valider"
 
 
             />
@@ -43,7 +43,7 @@
             android:id="@+id/tv_frag_weather"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Méteo..."
+            android:text="@string/m_teo"
             android:textSize="30sp" />
     </LinearLayout>
 </FrameLayout>

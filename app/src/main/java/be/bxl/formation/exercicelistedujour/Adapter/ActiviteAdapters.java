@@ -16,7 +16,8 @@ import java.util.List;
 import be.bxl.formation.exercicelistedujour.R;
 import be.bxl.formation.exercicelistedujour.models.TacheData;
 
-public class ActiviteAdapters extends RecyclerView.Adapter<ActiviteAdapters.ViewHolder> {
+public class
+ActiviteAdapters extends RecyclerView.Adapter<ActiviteAdapters.ViewHolder> {
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
