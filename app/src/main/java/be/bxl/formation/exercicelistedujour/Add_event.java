@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -21,10 +23,10 @@ import be.bxl.formation.exercicelistedujour.models.TacheData;
 import static java.time.LocalDate.now;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class Add_event extends AppCompatActivity implements View.OnClickListener{
+public class Add_event extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_LOCALEDATE = "localeDate";
     public static final String EXTRA_LOCALEARRAY = "Arraydata";
-    private Button btnmoinonday, btnplusoneday, btnAfficherEvent;
+    private Button btnmoinonday, btnplusoneday, btnAfficherEvent,btnAfficherAllEvent, btnExit;;
     private LocalDate dateevent = now();
     private ArrayList<TacheData> datatache = new ArrayList<>();
     private RecyclerView rvActivite;
@@ -44,6 +46,8 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
         btnplusoneday = findViewById(R.id.bt_addevent_plusunjour);
         btnAfficherEvent = findViewById(R.id.bt_addevent_afficherevent);
         rvActivite=findViewById(R.id.rv_addevent_item);
+        btnExit=findViewById(R.id.bt_addevent_exit);
+        btnAfficherAllEvent=findViewById(R.id.bt_addevent_tousevenement);
 
         if(getIntent().hasExtra(EXTRA_LOCALEDATE)) {
             Bundle bundle = getIntent().getExtras();
@@ -53,6 +57,9 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
             btnplusoneday.setOnClickListener(this);
             btnmoinonday.setOnClickListener(this);
             btnAfficherEvent.setOnClickListener(this);
+            btnExit.setOnClickListener(this);
+            btnAfficherAllEvent.setOnClickListener(this);
+
     }}
 
     public void onClick(View v) {
@@ -68,12 +75,29 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
             case R.id.bt_addevent_afficherevent:
                 afficherlestache();
                 break;
-
+            case R.id.bt_addevent_tousevenement:
+                afficherlestacheAll();
+                break;
+            case R.id.bt_addevent_exit:
+                goExit();
+                break;
             default:
                 throw new RuntimeException("Bouton non implementé !");
         }
     }
+    private void afficherlestacheAll() {
+        TacheDao tacheDao = new TacheDao(getApplicationContext());
+        tacheDao.openReadable();
+        datatache = tacheDao.getAll();
+        tacheDao.close();
+        afficherrecyclerview();
+    }
 
+    private void goExit() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
     private void afficherlestache() {
         TacheDao tacheDao = new TacheDao(getApplicationContext());
         tacheDao.openReadable();
@@ -81,8 +105,14 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
 
         tacheDao.close();
 
+        afficherrecyclerview();
 
 
+
+
+
+    }
+    private void afficherrecyclerview() {
         ActiviteAdapters activiteAdapters = new ActiviteAdapters(
                 getApplicationContext(),
                 datatache
@@ -96,11 +126,7 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
 
         rvActivite.setAdapter(activiteAdapters);
         rvActivite.setHasFixedSize(true);
-
-
-
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void moinsoneday() {
@@ -120,5 +146,21 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
         afficherdatebutton();
 
     }
+private void ViewitemRc(){
+ //   ActiviteAdapters activiteAdapters = new ActiviteAdapters(
+   //         getApplicationContext(),
+     //           datatache);
+    //je dois coder le onclick sur un adapter
+   // rvActivite.setAdapter(activiteAdapters);
 
+  //  rvActivite.setOnItemClickListener((parent, view, position, id) -> {
+
+
+    //    TacheData tacheData = datatache.get(position);
+
+     //   if(event != null) {
+     //       event.onClickItem(tacheData);
+       // }
+  //  });
+}
 }

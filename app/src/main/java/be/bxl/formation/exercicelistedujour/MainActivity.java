@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Définition d'une operation a réaliser via le Manager
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.add(R.id.container_fragment, FragmentMeteo);
+        transaction.replace(R.id.container_fragment, FragmentMeteo);
 
         // Application de la transaction
         transaction.commit();
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Définition d'une operation a réaliser via le Manager
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.add(R.id.container_fragment, FragmentAjouterActivite);
+        transaction.replace(R.id.container_fragment, FragmentAjouterActivite);
 
         // Application de la transaction
         transaction.commit();
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void afficherdatebutton() {
 
-        btnAfficherEvent.setText("evenement du " + dateevent.toString());
+        btnAfficherEvent.setText(getString(R.string.evenemeent_du) + dateevent.toString());
 
     }
 

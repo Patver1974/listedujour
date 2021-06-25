@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ExerciceListeDuJour</string>
+    <string name="date">date</string>
+    <string name="nom">name</string>
+    <string name="nom_de_la_ville">Name Stad</string>
+    <string name="ville">Stad</string>
+    <string name="valider">Ok</string>
+    <string name="m_teo">Wheater</string>
+    <string name="evenemeent_du">Event of</string>
+    <string name="description">Desc</string>
+</resources>

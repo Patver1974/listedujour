@@ -29,7 +29,7 @@
                     android:id="@+id/item_actvite_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Date"
+                    android:text="@string/date"
                     android:textSize="10sp"
 
                     android:ellipsize="end"
@@ -47,7 +47,7 @@
                     android:id="@+id/item_actvite_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="NAME"
+                    android:text="@string/nom"
                     android:textSize="15sp"
                     android:ellipsize="end"
                     android:maxLines="1"
@@ -57,7 +57,7 @@
                     android:id="@+id/item_activite_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Description"
+                    android:text="@string/description"
                     android:textSize="10sp"
                     />
             </LinearLayout>
