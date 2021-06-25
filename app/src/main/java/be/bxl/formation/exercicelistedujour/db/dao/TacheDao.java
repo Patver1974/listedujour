@@ -176,6 +176,17 @@ public class TacheDao {
         return taches;
     }
 
+    // Delete
+    public boolean deletedatebefore(LocalDate localDate) {
+        // -> "DELETE FROM product WHERE _id = " + id;
+
+        int nbRow = db.delete( DbInfo.Tache.TABLE_NAME,
+                DbInfo.Tache.COLUMN_DATEEVENT+" = ?",
+                new String[]{localDate.format(DateTimeFormatter.ISO_DATE)});
+
+        return nbRow == 1;
+    }
+
 
 }
 

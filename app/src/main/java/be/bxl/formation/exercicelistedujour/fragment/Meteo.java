@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.time.LocalDate;
@@ -29,6 +30,7 @@ public class Meteo extends Fragment {
     private LocalDate DateMeteo;
     private TextView tvWeather;
     private EditText etVille;
+    private FrameLayout flmeteo;
     private Button btValiderNom;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_DATE_METEO = "DateMeteo";
@@ -90,11 +92,17 @@ public class Meteo extends Fragment {
         tvWeather = v.findViewById(R.id.tv_frag_weather);
         etVille = v.findViewById(R.id.et_frag_meteo_nomville);
         btValiderNom = v.findViewById(R.id.bt_frag_meteo_validernom);
+        flmeteo = v.findViewById(R.id.Fl_meteo_Frame);
         initialiseMeteo();
         return v;
     }
 
+
     private void initialiseMeteo() {
+
+
+
+
         btValiderNom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

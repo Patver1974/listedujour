@@ -26,7 +26,8 @@ import static java.time.LocalDate.now;
 public class Add_event extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_LOCALEDATE = "localeDate";
     public static final String EXTRA_LOCALEARRAY = "Arraydata";
-    private Button btnmoinonday, btnplusoneday, btnAfficherEvent,btnAfficherAllEvent, btnExit;;
+    private Button btnmoinonday, btnplusoneday, btnAfficherEvent,btnAfficherAllEvent, btnExit;
+    private Button btdelDay,btmodifier;
     private LocalDate dateevent = now();
     private ArrayList<TacheData> datatache = new ArrayList<>();
     private RecyclerView rvActivite;
@@ -42,6 +43,8 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
         datatache.add(new TacheData(23,6,2021,"manger","prendre banane"));
         datatache.add(new TacheData(23,6,2021,"manger","prendre pomme"));
 
+        btdelDay = findViewById(R.id.bt_addevent_deleteDay);
+        btmodifier = findViewById(R.id.bt_addevent_modifier);
         btnmoinonday = findViewById(R.id.bt_addevent_moinsunjour);
         btnplusoneday = findViewById(R.id.bt_addevent_plusunjour);
         btnAfficherEvent = findViewById(R.id.bt_addevent_afficherevent);
@@ -81,10 +84,20 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
             case R.id.bt_addevent_exit:
                 goExit();
                 break;
+            case R.id.bt_addevent_exit:
+                goDeleteday();
+                break;
             default:
                 throw new RuntimeException("Bouton non implementé !");
         }
     }
+
+    private void goDeleteday() {
+        TacheDao tacheDao = new TacheDao(getApplicationContext());
+        tacheDao.openWritable();
+        tacheDao.deletedatebefore(dateevent);
+    }
+
     private void afficherlestacheAll() {
         TacheDao tacheDao = new TacheDao(getApplicationContext());
         tacheDao.openReadable();
@@ -107,10 +120,6 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
 
         afficherrecyclerview();
 
-
-
-
-
     }
     private void afficherrecyclerview() {
         ActiviteAdapters activiteAdapters = new ActiviteAdapters(
@@ -128,7 +137,7 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
         rvActivite.setHasFixedSize(true);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     public void moinsoneday() {
         dateevent = dateevent.minusDays(1);
         afficherdatebutton();
@@ -140,27 +149,19 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     public void plusoneday() {
         dateevent = dateevent.plusDays(1);
         afficherdatebutton();
 
     }
-private void ViewitemRc(){
- //   ActiviteAdapters activiteAdapters = new ActiviteAdapters(
-   //         getApplicationContext(),
-     //           datatache);
-    //je dois coder le onclick sur un adapter
-   // rvActivite.setAdapter(activiteAdapters);
-
-  //  rvActivite.setOnItemClickListener((parent, view, position, id) -> {
 
 
-    //    TacheData tacheData = datatache.get(position);
 
-     //   if(event != null) {
-     //       event.onClickItem(tacheData);
-       // }
-  //  });
-}
-}
+rvActivite.addOnItemTouchListener(
+        new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+        @Override public void onItemClick(View view, int position) {
+            TacheData tachedata =
+        }
+    })
+            );
