@@ -26,8 +26,10 @@ import static java.time.LocalDate.now;
 public class Add_event extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_LOCALEDATE = "localeDate";
     public static final String EXTRA_LOCALEARRAY = "Arraydata";
+
     private Button btnmoinonday, btnplusoneday, btnAfficherEvent,btnAfficherAllEvent, btnExit;
     private Button btdelDay,btmodifier;
+
     private LocalDate dateevent = now();
     private ArrayList<TacheData> datatache = new ArrayList<>();
     private RecyclerView rvActivite;
@@ -37,14 +39,17 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
 
-
-
         //utiliser le bundle
         datatache.add(new TacheData(23,6,2021,"manger","prendre banane"));
         datatache.add(new TacheData(23,6,2021,"manger","prendre pomme"));
 
+
         btdelDay = findViewById(R.id.bt_addevent_deleteDay);
         btmodifier = findViewById(R.id.bt_addevent_modifier);
+
+        btnExit=findViewById(R.id.bt_addevent_exit);
+        btnAfficherAllEvent=findViewById(R.id.bt_addevent_tousevenement);
+
         btnmoinonday = findViewById(R.id.bt_addevent_moinsunjour);
         btnplusoneday = findViewById(R.id.bt_addevent_plusunjour);
         btnAfficherEvent = findViewById(R.id.bt_addevent_afficherevent);
@@ -84,19 +89,23 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
             case R.id.bt_addevent_exit:
                 goExit();
                 break;
+
             case R.id.bt_addevent_exit:
                 goDeleteday();
                 break;
+
             default:
                 throw new RuntimeException("Bouton non implementé !");
         }
     }
+
 
     private void goDeleteday() {
         TacheDao tacheDao = new TacheDao(getApplicationContext());
         tacheDao.openWritable();
         tacheDao.deletedatebefore(dateevent);
     }
+
 
     private void afficherlestacheAll() {
         TacheDao tacheDao = new TacheDao(getApplicationContext());
@@ -111,6 +120,7 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
         startActivity(intent);
         finish();
     }
+
     private void afficherlestache() {
         TacheDao tacheDao = new TacheDao(getApplicationContext());
         tacheDao.openReadable();
@@ -118,9 +128,28 @@ public class Add_event extends AppCompatActivity implements View.OnClickListener
 
         tacheDao.close();
 
+
         afficherrecyclerview();
 
     }
+    private void afficherrecyclerview() {
+
+
+        ActiviteAdapters activiteAdapters = new ActiviteAdapters(
+                getApplicationContext(),
+                datatache
+        );
+
+        // Configurer le RecyclerView
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(
+                3, StaggeredGridLayoutManager.VERTICAL
+        );
+        rvActivite.setLayoutManager(layoutManager);
+
+        rvActivite.setAdapter(activiteAdapters);
+        rvActivite.setHasFixedSize(true);
+    }
+
     private void afficherrecyclerview() {
         ActiviteAdapters activiteAdapters = new ActiviteAdapters(
                 getApplicationContext(),
