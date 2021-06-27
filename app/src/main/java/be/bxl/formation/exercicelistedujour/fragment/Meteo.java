@@ -1,5 +1,6 @@
 package be.bxl.formation.exercicelistedujour.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.time.LocalDate;
@@ -32,6 +34,7 @@ public class Meteo extends Fragment {
     private EditText etVille;
     private FrameLayout flmeteo;
     private Button btValiderNom;
+    private ImageView ivimagemeteo;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_DATE_METEO = "DateMeteo";
 
@@ -69,11 +72,22 @@ public class Meteo extends Fragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void Donnermeteo(String Ville    ) {
         RequestWeatherTask requestWeatherTask = new RequestWeatherTask();
 
         requestWeatherTask.setWeatherListener(data -> {
-            tvWeather.setText(data.getCity() + " " + data.getTemp() + "°c" + " humidite " + data.getHumidity());
+            tvWeather.setText(data.getCity() + " " + data.getTemp() + "°c" + " \n humidite " + data.getHumidity()
+                    + " \n longitude " + data.getLongitude()+ " \n latitude " + data.getLatitude()+ " \n description " + data.getDescription());
+            switch (data.getDescription()){
+                case "nuageux" : ivimagemeteo.setImageResource(R.drawable.nuageux);break;
+                case "pluie" : ivimagemeteo.setImageResource(R.drawable.pluie);break;
+                case "soleil" : ivimagemeteo.setImageResource(R.drawable.soleil);break;
+
+
+            }
+
+
         });
 
         requestWeatherTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Ville);
@@ -93,6 +107,7 @@ public class Meteo extends Fragment {
         etVille = v.findViewById(R.id.et_frag_meteo_nomville);
         btValiderNom = v.findViewById(R.id.bt_frag_meteo_validernom);
         flmeteo = v.findViewById(R.id.Fl_meteo_Frame);
+        ivimagemeteo = v.findViewById(R.id.iv_frag_meteo_img);
         initialiseMeteo();
         return v;
     }

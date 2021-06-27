@@ -8,6 +8,7 @@ import androidx.annotation.IntegerRes;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 import be.bxl.formation.exercicelistedujour.R;
 import be.bxl.formation.exercicelistedujour.db.dao.TacheDao;
 import be.bxl.formation.exercicelistedujour.models.TacheData;
+
+import static java.time.LocalDate.now;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,8 +77,7 @@ public class AjouterActivite extends Fragment {
 
     private void initializeViewData() {
 
-        et_nomactivite.setText("Nom1");
-        et_description.setText("Desc1");
+
 
 
         bt_annuler.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +106,12 @@ public class AjouterActivite extends Fragment {
                     tacheDao.openWritable();
                     long id = tacheDao.insert(ATaches);
                     tacheDao.close();
+                    et_description.setText("");
+                    et_nomactivite.setText("");
+                     LocalDate dateevent = now();
+                     dp_date.updateDate(dateevent.getYear(),dateevent.getMonthValue(),
+                             dateevent.getDayOfMonth());
+
                 }
             }
         });
@@ -126,6 +134,9 @@ public class AjouterActivite extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         et_nomactivite.setText("");
                         et_description.setText("");
+                         LocalDate dateevent = now();
+
+
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

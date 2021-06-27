@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(getApplicationContext(), Add_event.class);
         intent.putExtra(Add_event.EXTRA_LOCALEDATE,dateevent.format(DateTimeFormatter.ISO_DATE));
         intent.putExtra(Add_event.EXTRA_LOCALEARRAY,Datatache);
-        // Démarre l'activté de l'exo 02
+
         startActivity(intent);
 
      //finish();
@@ -124,7 +124,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClickItem(TacheData ATaches) {
                 Log.d("Edzzzzzzzitable", ATaches.getName().toString());
                 Datatache.add(ATaches);
+
+
             }
+
         });
 
 

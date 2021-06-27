@@ -2,6 +2,7 @@ package be.bxl.formation.exercicelistedujour.webapi;
 
 import android.os.AsyncTask;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import be.bxl.formation.exercicelistedujour.models.WeatherData;
 
@@ -85,11 +87,24 @@ public class RequestWeatherTask extends AsyncTask<String, Void, WeatherData> {
 
                 String city = json.getString("name");
 
+                JSONObject cood = json.getJSONObject("coord");
+                double latitude = cood.getDouble("lat");
+                double longitude = cood.getDouble("lon");
+
+
+                 //weather = json.getJSONObject("weather")
+                JSONArray weather= json.getJSONArray("weather");
+                JSONObject chkobjt = weather.getJSONObject(0);
+                String tempdesc = chkobjt.getString("description");
+
+
+
                 JSONObject main = json.getJSONObject("main");
                 double temp = main.getDouble("temp");
                 double humidite = main.getDouble("humidity");
 
-                result = new WeatherData(city, temp, humidite);
+
+                result = new WeatherData(city, temp, humidite,latitude,longitude,tempdesc);
             }
             catch (JSONException e) {
                 e.printStackTrace();

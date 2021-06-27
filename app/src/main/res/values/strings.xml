@@ -14,4 +14,6 @@
     <string name="valider">Valider</string>
     <string name="m_teo">Méteo...</string>
     <string name="evenemeent_du">\"evenement du \"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

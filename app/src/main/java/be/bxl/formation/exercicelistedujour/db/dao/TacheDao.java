@@ -186,8 +186,44 @@ public class TacheDao {
 
         return nbRow == 1;
     }
+    public void deleteonetache(TacheData tache) {
+        // -> "DELETE FROM product WHERE _id = " + id;
+
+        int nbRow = db.delete( DbInfo.Tache.TABLE_NAME,
+                DbInfo.Tache.COLUMN_DATEEVENT+" = ? and "
+                        + DbInfo.Tache.COLUMN_DESCRIPTION + " = ? and "
+                        + DbInfo.Tache.COLUMN_NAME + " = ? ",
+
+                new String[]{tache.getDateTacheString(), tache.getDescription(), tache.getName()}
+                );
 
 
+}
+    public ArrayList<TacheData> getOne(TacheData tache) {
+        Cursor cursor = db.query(DbInfo.Tache.TABLE_NAME, null,
+                DbInfo.Tache.COLUMN_DATEEVENT+" = ? and "
+                        + DbInfo.Tache.COLUMN_DESCRIPTION + " = ? and "
+                        + DbInfo.Tache.COLUMN_NAME + " = ? ",
+
+                new String[]{tache.getDateTacheString(), tache.getDescription(), tache.getName()}
+        ,null, null, null);;
+
+        ArrayList<TacheData> taches = new ArrayList<>();
+
+        if(cursor.getCount() == 0) {
+            return taches;
+        }
+
+        cursor.moveToFirst();
+        while(! cursor.isAfterLast()) {
+            TacheData p = cursorToProduct(cursor);
+            taches.add(p);
+
+            cursor.moveToNext();
+        }
+
+        return taches;
+    }
 }
 
 

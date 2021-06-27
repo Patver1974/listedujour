@@ -50,14 +50,13 @@ ImageView ivimage;
 
                 break;
                 case 9: tvCoucou.setText("Salut mon inconnu !!");
-                ivimage.setImageResource(R.drawable.inconnu);
-
+                    ivimage.setImageResource(R.drawable.inconnu);
                 break;
                 case 10: tvCoucou.setText("Salut mon gars !!"); break;
 
             }
 
         });
-        counterTask.execute(20);
+        counterTask.execute(5);
     }
 }
